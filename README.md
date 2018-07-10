@@ -2,7 +2,7 @@
 
 [![image](https://img.shields.io/pypi/v/numvector.svg)](https://pypi.python.org/pypi/numvector)
 
-[![image](https://img.shields.io/travis/henryiii/numvector.svg)](https://travis-ci.org/henryiii/numvector)
+[![image](https://travis-ci.com/henryiii/numvector.svg?branch=master)](https://travis-ci.com/henryiii/numvector)
 
 [![Documentation Status](https://readthedocs.org/projects/numvector/badge/?version=latest)](https://numvector.readthedocs.io/en/latest/?badge=latest)
 
