@@ -44,7 +44,6 @@ def test_default_const_iterable():
 def test_vectors_3D_constructors():
     v1 = Vector3D()
     assert str(v1) == str(np.array([0.,0.,0.]))
-    assert repr(v1) == "Vector3D([0., 0., 0.])"
     assert str(v1) == str(Vector3D.origin())
 
     v2 = Vector3D(1.,1.,1.)
@@ -80,7 +79,6 @@ def test_vectors_Lorentz_constructors():
     #
     lv1 = LorentzVector()
     assert str(lv1) == str(np.array([0.,0.,0.,0.]))
-    assert repr(lv1) == "LorentzVector([0., 0., 0., 0.])"
     lv2 = LorentzVector(1., 1., 1., 1.)
     assert str(lv2) == str(np.array([1.,1.,1.,1.]))
 
@@ -256,7 +254,7 @@ def test_vectors_Lorentz_rotations():
     with pytest.raises(AttributeError):
         LorentzVector.rotate_axis(LorentzVector(), pi, ['a','b',3])
     #
-    lv1 = LorentzVector(*v1, 1.)
+    lv1 = LorentzVector(v1[0], v1[1], v1[2], 1.)
     assert lv1.phi() == 0.
     assert lv1.rotate_axis(Vector3D.Z, pi/2).phi() == pi/2
     assert_allclose( lv1.rotate_axis(Vector3D.Z,pi/2) , LorentzVector(0., 1., 0.,  1.))
@@ -266,13 +264,13 @@ def test_vectors_Lorentz_rotations():
     assert_allclose( lv1.rotate_axis(Vector3D.Y,-pi) , LorentzVector(-1., 0., 0.,  1.))
     assert lv1.rotate_axis(Vector3D.X,pi).phi() == 0.
     assert_allclose( lv1.rotate_axis(Vector3D.X,pi) , LorentzVector(1., 0., 0.,  1.))
-    lv2 = LorentzVector(*v2, 2.0)
+    lv2 = LorentzVector(v2[0], v2[1], v2[2], 2.0)
     assert lv2.phi() == pi/2
     assert lv2.theta() == pi/2
     assert lv2.rotate_axis(Vector3D.X,pi).phi() == -pi/2
     assert lv2.rotate_axis(Vector3D.X,pi).theta() == pi/2
     assert_allclose( lv2.rotate_axis(Vector3D.X,pi) , LorentzVector(0., -1., 0.,  2.0))
-    lv3 = LorentzVector(*v3, 2.0)
+    lv3 = LorentzVector(v3[0], v3[1], v3[2], 2.0)
     assert_allclose( lv2.rotate_axis(axis, angle) ,  lv3, atol = .0000001)
     assert_allclose( lv2.rotate_axis(-1.*axis, -angle) , lv3, atol = .0000001)
 
