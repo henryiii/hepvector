@@ -3,15 +3,33 @@ from .vectors import LorentzVector, Vector3D
 from .numbautils import vectorize, float64, float32
 import numpy as np
 
+__all__ = ('gen_phase_space', "PDF")
+
+# Compile the PDK function if possible
+@vectorize([float64(float64,float64,float64),
+            float32(float32,float32,float32)])
 def PDK(a,b,c):
+    'Function used by gen_phase_space, accelerated with numba if possible'
     x = (a-b-c)*(a+b+c)*(a-b+c)*(a+b-c)
     return np.sqrt(x)/(2*a)
 
-# Compile the PDK function if possible
-PDK = vectorize([float64(float64,float64,float64),
-                     float32(float32,float32,float32)])(PDK)
+def gen_phase_space(mother, # type: float
+        masslist,           # type: List[float]
+        events,             # type: int
+        fermi=False,        # type: bool
+        rand=None):         # need to find correct Optional[...] type
+    # type: (...) -> [LorentzVector, np.array]
+    """gen_phase_space
+    Generate phase space montecarlo.
 
-def gen_phase_space(mother, masslist, events, fermi=False, rand=None):
+    :param mother: The mass of the mother
+    :param masslist: A list of masses of the daugters
+    :param events: The number of events to produce
+    :param fermi: Use fermi calculation
+    :param rand: A random state to start with (np.random.RandomStat().rand by default)
+
+    :return: LorentzVector array, weight array
+    """
     if rand is None:
         prng = np.random.RandomState()
         rand = prng.rand

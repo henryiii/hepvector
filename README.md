@@ -18,15 +18,16 @@ The key design feature is array support. While non-array is also possible (backw
 * Phase space generator, similar speed (within a factor of 2 or so) to compiled ROOT, but fully in Python! Even works on an iPad. Also makes a good example of what HEPvector code looks like.
 * Lorentz, 3D, and 2D vectors, and all common operations in a single vector base class. More metrics and dimensions can be added by users.
 * Free software: BSD license
-<!--   Documentation: <https://hepvector.readthedocs.io>. -->
+*  Documentation: <https://hepvector.readthedocs.io>
 
 ## Performance
 
-Generation of phase space:
+To take advantage of the underlying numpy machinery, you should use arrays of vectors when possible. For example, if you use the included generation of phase space:
+
 * 1 at a time: 5.18 ± 0.06 ms each
 * 1,000,000 at a time: 0.80 ± 0.04 µs each (803 ms total)
 
-So that’s 6,000 times faster if you generate 1,000,000 events using arrays instead of placing event-per-event code in loops.
+You can see it is 6,000 times faster if you generate 1,000,000 events using arrays instead of placing event-per-event code in loops.
 
 ## Usage
 
@@ -46,11 +47,14 @@ You can use a variety of methods:
 
 ```python
 dot_product = a.dot(b)
-cross_product = a.dot(b)
+cross_product = a.cross(b)
 boost_vec = a.boost()
 ````
 
-(and others, see the docs.)
+and others, see the docs. HEPvector is just a simple wrapper on top of a numpy array, where the
+first dimension represents the components of the vector.
+Any operation that does not apply to vectors (such as the transpose `.T`) uses the underlying numpy
+functionality and may return a numpy array instead of a Vector.
 
 ## Credits
 
