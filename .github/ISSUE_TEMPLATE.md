@@ -1,4 +1,4 @@
-* NumVector version:
+* HEPvector version:
 * Python version:
 * Operating System:
 

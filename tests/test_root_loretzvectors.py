@@ -5,7 +5,7 @@ from pytest import approx
 import numpy as np
 assert_allclose = partial(np.testing.assert_allclose, atol=.0000001)
 
-from numvector.vectors import LorentzVector, Vector3D
+from hepvector.vectors import LorentzVector, Vector3D
 import itertools
 
 ROOT = pytest.importorskip('ROOT')

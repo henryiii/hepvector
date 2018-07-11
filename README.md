@@ -1,12 +1,12 @@
-# NumVector
+# HEPvector
 
-[![image](https://img.shields.io/pypi/v/numvector.svg)](https://pypi.python.org/pypi/numvector)
+[![image](https://img.shields.io/pypi/v/hepvector.svg)](https://pypi.python.org/pypi/hepvector)
 
-[![image](https://travis-ci.com/henryiii/numvector.svg?branch=master)](https://travis-ci.com/henryiii/numvector)
+[![image](https://travis-ci.com/henryiii/hepvector.svg?branch=master)](https://travis-ci.com/henryiii/hepvector)
 
-[![Documentation Status](https://readthedocs.org/projects/numvector/badge/?version=latest)](https://numvector.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/hepvector/badge/?version=latest)](https://hepvector.readthedocs.io/en/latest/?badge=latest)
 
-[![Updates](https://pyup.io/repos/github/henryiii/numvector/shield.svg)](https://pyup.io/repos/github/henryiii/numvector/)
+[![Updates](https://pyup.io/repos/github/henryiii/hepvector/shield.svg)](https://pyup.io/repos/github/henryiii/hepvector/)
 
 Numpy based vectors for general purpose calculation and physics. Designed for the SciKit-HEP project, but can be used stand-alone with no dependencies except Numpy (extra performance can be obtained if Numba is present).
 
@@ -18,10 +18,10 @@ The key design feature is array support. While non-array is also possible (backw
   ```
   would make two vectors, [1,2,4] and [1,3,4] (standard Numpy casting rules). In fact, the vector classes are simply subclasses of NDArrays, so anything that works with arrays works with Vectors, and Vectors can be cast to/from Numpy without a copy.
 * Optional speedups with Numba for a few parts (more eventually)
-* Phase space generator, similar speed (within a factor of 2 or so) to compiled ROOT, but fully in Python! Even works on an iPad. Also makes a good example of what NumVector code looks like.
+* Phase space generator, similar speed (within a factor of 2 or so) to compiled ROOT, but fully in Python! Even works on an iPad. Also makes a good example of what HEPvector code looks like.
 * Lorentz, 3D, and 2D vectors, and all common operations in a single vector base class. More metrics and dimensions can be added by users.
 * Free software: BSD license
-<!--   Documentation: <https://numvector.readthedocs.io>. -->
+<!--   Documentation: <https://hepvector.readthedocs.io>. -->
 
 ## Performance
 
@@ -57,7 +57,7 @@ boost_vec = a.boost()
 
 ## Credits
 
-NumVector was created by Henry Schreiner.
+HEPvector was created by Henry Schreiner.
 
 This package was created with
 [Cookiecutter](https://github.com/audreyr/cookiecutter) and the

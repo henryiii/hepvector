@@ -6,7 +6,7 @@ import numpy as np
 from math import sqrt
 assert_allclose = partial(np.testing.assert_allclose, atol=.0000001)
 
-from numvector.vectors import Vector2D
+from hepvector.vectors import Vector2D
 import itertools
 
 ROOT = pytest.importorskip('ROOT')

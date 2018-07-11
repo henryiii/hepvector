@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=numvector
+set SPHINXPROJ=hepvector
 
 if "%1" == "" goto help
 
