@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use NumVector in a project::
+To use HEPvector in a project::
 
-    import numvector
+    import hepvector

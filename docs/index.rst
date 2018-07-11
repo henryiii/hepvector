@@ -1,4 +1,4 @@
-Welcome to NumVector's documentation!
+Welcome to HEPvector's documentation!
 ======================================
 
 .. toctree::
