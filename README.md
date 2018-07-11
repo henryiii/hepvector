@@ -1,11 +1,8 @@
-# HEPvector
+![HEPVector](images/HEPvector.png)
 
 [![image](https://img.shields.io/pypi/v/hepvector.svg)](https://pypi.python.org/pypi/hepvector)
-
 [![image](https://travis-ci.com/henryiii/hepvector.svg?branch=master)](https://travis-ci.com/henryiii/hepvector)
-
 [![Documentation Status](https://readthedocs.org/projects/hepvector/badge/?version=latest)](https://hepvector.readthedocs.io/en/latest/?badge=latest)
-
 [![Updates](https://pyup.io/repos/github/henryiii/hepvector/shield.svg)](https://pyup.io/repos/github/henryiii/hepvector/)
 
 Numpy based vectors for general purpose calculation and physics. Designed for the SciKit-HEP project, but can be used stand-alone with no dependencies except Numpy (extra performance can be obtained if Numba is present).
