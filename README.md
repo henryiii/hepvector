@@ -1,4 +1,4 @@
-# HEPvector
+![HEPVector](images/HEPvector.png)
 
 [![image](https://img.shields.io/pypi/v/hepvector.svg)](https://pypi.python.org/pypi/hepvector)
 
