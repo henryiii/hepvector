@@ -31,6 +31,11 @@ You can see it is 6,000 times faster if you generate 1,000,000 events using arra
 
 ## Usage
 
+
+The most important thing to remember is that this is just a lightly modified subclass of `np.ndarray` (just like `np.array` and `np.matrix`).
+The first dimension is the vector components; all `Vector3D` shapes will start with 3, for example. If you index, start your index with a `:` to
+capture all dimensions; if you don't, you'll get a normal `np.array` out. You can use `.view` to convert back and forth (no memory is copied).
+
 You can create a vector several ways:
 
 ```python
@@ -55,6 +60,16 @@ and others, see the docs. HEPvector is just a simple wrapper on top of a numpy a
 first dimension represents the components of the vector.
 Any operation that does not apply to vectors (such as the transpose `.T`) uses the underlying numpy
 functionality and may return a numpy array instead of a Vector.
+
+<!--
+The methods have been named to match idomatic python; here is the conversion to ROOT:
+
+| HEPvector          | ROOT               |
+|--------------------|--------------------|
+| `v.X()`, `v.Y()`, `v.Z()`, `v.T()` | `v.x`, `v.y`, `v.z`, `v.e`
+v2.Px(); v2.Py(); v2.Pz(); v2.E()          // returns cartesian components for the cylindrical vector v2
+v1.Pt(); v1.Eta(); v1.Phi(); v1.M()
+-->
 
 ## Credits
 

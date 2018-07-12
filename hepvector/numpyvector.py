@@ -228,8 +228,6 @@ class Vector2D(Vector):
     __slots__ = ()
     NAMES = ('x', 'y')
 
-
-    # Using Py3 keyword only syntax for dtype
     def __new__(cls, x=0, y=0, dtype=np.double):
         return Vector.__new__(cls, x, y, dtype=dtype)
 
