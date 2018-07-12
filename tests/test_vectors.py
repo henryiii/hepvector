@@ -13,7 +13,7 @@ from functools import partial
 import numpy as np
 assert_allclose = partial(np.testing.assert_allclose, atol=.0000001)
 
-from hepvector.vectors import *
+from hepvector import Vector2D, Vector3D, LorentzVector
 from math import pi, sqrt
 
 

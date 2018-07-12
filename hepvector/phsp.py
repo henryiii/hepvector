@@ -1,5 +1,5 @@
 from __future__ import division, print_function, absolute_import
-from .vectors import LorentzVector, Vector3D
+from .numpyvector import LorentzVector, Vector3D
 from .numbautils import vectorize, float64, float32
 import numpy as np
 
