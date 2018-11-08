@@ -106,40 +106,43 @@ class Vector(np.ndarray):
             return np.sum(self * other, 0).view(np.ndarray)
 
 
+    @property
     def mag(self):
         '''
         This currently returns a 1D array always.
 
         >>> v1 = Vector3D(1, 2, 3)
         >>> v1p = Vector3D([1,2,3], [2,3,5], [3,3,1])
-        >>> np.all(v1.mag() == np.sqrt(14))
+        >>> np.all(v1.mag == np.sqrt(14))
         True
-        >>> v1p.mag()
+        >>> v1p.mag
         array([ 3.74165739,  4.69041576,  5.91607978])
         '''
 
-        return np.sqrt(np.abs(self.mag2()).view(np.ndarray))*np.sign(self.mag2())
+        return np.sqrt(np.abs(self.mag2).view(np.ndarray))*np.sign(self.mag2)
 
+    @property
     def mag2(self):
         '''
         >>> v1 = Vector3D(1, 2, 3)
         >>> v1p = Vector3D([1,2,3], [2,3,5], [3,3,1])
-        >>> np.all(v1.mag2() == 14)
+        >>> np.all(v1.mag2 == 14)
         True
-        >>> v1p.mag2()
+        >>> v1p.mag2
         array([ 14.,  22.,  35.])
 
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.mag2()
+        >>> v.mag2
         array([-13.75])
         '''
         return self.dot(self)
 
+    @property
     def unit(self, inplace=False):
         if inplace:
-            self /= self.mag()
+            self /= self.mag
         else:
-            return self / self.mag()
+            return self / self.mag
 
 
     @property
@@ -156,8 +159,8 @@ class Vector(np.ndarray):
 
     def angle(self, other, normal=None):
         'Angle between vectors, might not be normalized.'
-        a = self.unit()
-        b = other.unit()
+        a = self.unit
+        b = other.unit
         # Protection vs. round off error
         ang = np.arccos(np.clip(a.dot(b),-1,1))
         # Only defined for Vector3
@@ -231,11 +234,13 @@ class Vector2D(Vector):
     def __new__(cls, x=0, y=0, dtype=np.double):
         return Vector.__new__(cls, x, y, dtype=dtype)
 
+    @property
     def phi(self):
         return np.arctan2(self.y, self.x).view(np.ndarray)
 
+    @property
     def rho(self):
-        return self[:2].view(Vector2D).mag().view(np.ndarray)
+        return self[:2].view(Vector2D).mag.view(np.ndarray)
 
     def angle(self, other):
         'Angle between two vectors'
@@ -243,11 +248,11 @@ class Vector2D(Vector):
 
     def pt2(self):
         'Tranverse compenent squared'
-        return self[:2].view(Vector2D).mag2().view(np.ndarray)
+        return self[:2].view(Vector2D).mag2.view(np.ndarray)
 
     def pt(self):
         'Tranverse compenent'
-        return self.rho()
+        return self.rho
 
 class Vector3D(Vector2D):
     __slots__ = ()
@@ -266,7 +271,7 @@ class Vector3D(Vector2D):
         return np.arctan2(prep,self.z).view(np.ndarray)
 
     def r(self):
-        return self[:3].view(Vector3D).mag().view(np.ndarray)
+        return self[:3].view(Vector3D).mag.view(np.ndarray)
 
 
     def in_basis(self, xhat, yhat, zhat):
@@ -279,7 +284,7 @@ class Vector3D(Vector2D):
 
     def rotate_axis(self, axis, angle):
         """Rotate vector by a given angle (in radians) around a given axis."""
-        u = axis.unit()
+        u = axis.unit
 
         c, s = np.cos(angle), np.sin(angle)
         c1 = 1. - c
@@ -386,7 +391,7 @@ class LorentzVector(Vector3D):
         >>> v.p()
         array([ 3.74165739])
         '''
-        return np.sqrt(self.p3.mag2())
+        return np.sqrt(self.p3.mag2)
 
     def e(self):
         '''
@@ -444,7 +449,7 @@ class LorentzVector(Vector3D):
                [ 2.04882269]])
         '''
 
-        b2 = vector3.mag2()
+        b2 = vector3.mag2
         gamma = 1.0 / np.sqrt(1-b2)
         gamma2 = np.zeros_like(b2)
         mask = b2 != 0
@@ -464,7 +469,7 @@ class LorentzVector(Vector3D):
         """Return :math:`\\Delta R` the distance in (eta,phi) space with another Lorentz vector, defined as:
         :math:`\\Delta R = \\sqrt{(\\Delta \\eta)^2 + (\\Delta \\phi)^2}`
         """
-        delta_phi = np.mod(self.phi() - other.phi() + np.pi, np.pi*2) - np.pi
+        delta_phi = np.mod(self.phi - other.phi + np.pi, np.pi*2) - np.pi
         return np.sqrt((self.eta() - other.eta())**2 + delta_phi**2)
 
     def pseudorapidity(self):
