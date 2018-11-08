@@ -374,10 +374,10 @@ class LorentzVector(Vector3D):
         return self
 
     @property
-    def vect(self):
+    def p3(self):
         return self[:3].view(Vector3D)
-    @vect.setter
-    def vect(self, obj):
+    @p3.setter
+    def p3(self, obj):
         self[:3] = obj
 
     def p(self):
@@ -386,7 +386,7 @@ class LorentzVector(Vector3D):
         >>> v.p()
         array([ 3.74165739])
         '''
-        return np.sqrt(self.vect.mag2())
+        return np.sqrt(self.p3.mag2())
 
     def e(self):
         '''
@@ -451,13 +451,13 @@ class LorentzVector(Vector3D):
         gamma2[mask] = (gamma[mask] - 1) / b2[mask]
         del mask
 
-        bp = self.vect.dot(vector3)
+        bp = self.p3.dot(vector3)
         if inplace:
-            self.vect += gamma2*bp*vector3 + gamma*vector3*self.t
+            self.p3 += gamma2*bp*vector3 + gamma*vector3*self.t
             self.t += bp
             self.t *= gamma
         else:
-            v = self.vect + gamma2*bp*vector3 + gamma*vector3*self.t
+            v = self.p3 + gamma2*bp*vector3 + gamma*vector3*self.t
             return self.__class__(v[0], v[1], v[2], gamma*(self.t+bp))
 
     def delta_r(self, other):

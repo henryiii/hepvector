@@ -106,8 +106,8 @@ def test_values(xyz, t):
     # def __new__(cls, x=0, y=0, z=0, t=0, dtype=np.double):
     # def from_pt_eta_phi(cls, pt, eta, phi, t):
     # def from_pt_eta_phi_m(cls, pt, eta, phi, m):
-    # def vect(self):
-    # def vect(self, obj):
+    # def p3(self):
+    # def p3(self, obj):
 
     # def p(self):
     assert svec.p() == approx(rvec.P())
