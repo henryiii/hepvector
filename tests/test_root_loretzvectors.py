@@ -64,10 +64,10 @@ def test_values(xyz, t):
     # def dot(self, other):
 
     # def mag(self):
-    assert svec.mag() == approx(rvec.Mag())
+    assert svec.mag == approx(rvec.Mag())
 
     # def mag2(self):
-    assert svec.mag2() == approx(rvec.Mag2())
+    assert svec.mag2 == approx(rvec.Mag2())
 
     # def unit(self, inplace=False):
     # def T(self):
@@ -83,10 +83,10 @@ def test_values(xyz, t):
     # def __new__(cls, x=0, y=0, dtype=np.double):
 
     # def phi(self):
-    assert svec.phi() == approx(rvec.Phi())
+    assert svec.phi == approx(rvec.Phi())
 
     # def rho(self):
-    # assert svec.rho() == approx(rvec.Rho()) # Fails
+    # assert svec.rho == approx(rvec.Rho()) # Fails
 
     # def angle(self, other):
     # def pt2(self):
@@ -95,7 +95,7 @@ def test_values(xyz, t):
     # def cross(self, other):
 
     # def theta(self):
-    assert svec.theta() == approx(rvec.Theta())
+    assert svec.theta == approx(rvec.Theta())
 
     # def r(self):
     # def in_basis(self, xhat, yhat, zhat):
@@ -106,11 +106,11 @@ def test_values(xyz, t):
     # def __new__(cls, x=0, y=0, z=0, t=0, dtype=np.double):
     # def from_pt_eta_phi(cls, pt, eta, phi, t):
     # def from_pt_eta_phi_m(cls, pt, eta, phi, m):
-    # def vect(self):
-    # def vect(self, obj):
+    # def p3(self):
+    # def p3(self, obj):
 
     # def p(self):
-    assert svec.p() == approx(rvec.P())
+    assert svec.p == approx(rvec.P())
 
     # def e(self):
     # def eta(self):
@@ -118,7 +118,7 @@ def test_values(xyz, t):
     # def beta(self):
 
     # def boost_vector(self):
-    assert_same(svec.boost_vector(), rvec.BoostVector())
+    assert_same(svec.boostp3, rvec.BoostVector())
 
     # def boost(self, vector3, inplace=False):
     # def delta_r(self, other):

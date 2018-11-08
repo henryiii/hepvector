@@ -60,10 +60,10 @@ def test_values(xyz):
     # def dot(self, other):
 
     # def mag(self):
-    assert svec.mag() == approx(rvec.Mag())
+    assert svec.mag == approx(rvec.Mag())
 
     # def mag2(self):
-    assert svec.mag2() == approx(rvec.Mag2())
+    assert svec.mag2 == approx(rvec.Mag2())
 
     # def unit(self, inplace=False):
     # def T(self):
@@ -79,10 +79,10 @@ def test_values(xyz):
     # def __new__(cls, x=0, y=0, dtype=np.double):
 
     # def phi(self):
-    assert svec.phi() == approx(rvec.Phi())
+    assert svec.phi == approx(rvec.Phi())
 
     # def rho(self):
-    # assert svec.rho() == approx(rvec.Rho()) # Fails
+    # assert svec.rho == approx(rvec.Rho()) # Fails
 
     # def angle(self, other):
     # def pt2(self):
@@ -91,7 +91,7 @@ def test_values(xyz):
     # def cross(self, other):
 
     # def theta(self):
-    assert svec.theta() == approx(rvec.Theta())
+    assert svec.theta == approx(rvec.Theta())
 
     # def r(self):
     # def in_basis(self, xhat, yhat, zhat):

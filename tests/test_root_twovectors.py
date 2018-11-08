@@ -53,10 +53,10 @@ def test_values(xy):
     # def dot(self, other):
 
     # def mag(self):
-    assert svec.mag() == approx(sqrt(rvec.Mod2()))
+    assert svec.mag == approx(sqrt(rvec.Mod2()))
 
     # def mag2(self):
-    assert svec.mag2() == approx(rvec.Mod2())
+    assert svec.mag2 == approx(rvec.Mod2())
 
     # def unit(self, inplace=False):
     # def T(self):

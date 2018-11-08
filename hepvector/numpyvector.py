@@ -106,40 +106,43 @@ class Vector(np.ndarray):
             return np.sum(self * other, 0).view(np.ndarray)
 
 
+    @property
     def mag(self):
         '''
         This currently returns a 1D array always.
 
         >>> v1 = Vector3D(1, 2, 3)
         >>> v1p = Vector3D([1,2,3], [2,3,5], [3,3,1])
-        >>> np.all(v1.mag() == np.sqrt(14))
+        >>> np.all(v1.mag == np.sqrt(14))
         True
-        >>> v1p.mag()
+        >>> v1p.mag
         array([ 3.74165739,  4.69041576,  5.91607978])
         '''
 
-        return np.sqrt(np.abs(self.mag2()).view(np.ndarray))*np.sign(self.mag2())
+        return np.sqrt(np.abs(self.mag2).view(np.ndarray))*np.sign(self.mag2)
 
+    @property
     def mag2(self):
         '''
         >>> v1 = Vector3D(1, 2, 3)
         >>> v1p = Vector3D([1,2,3], [2,3,5], [3,3,1])
-        >>> np.all(v1.mag2() == 14)
+        >>> np.all(v1.mag2 == 14)
         True
-        >>> v1p.mag2()
+        >>> v1p.mag2
         array([ 14.,  22.,  35.])
 
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.mag2()
+        >>> v.mag2
         array([-13.75])
         '''
         return self.dot(self)
 
+    @property
     def unit(self, inplace=False):
         if inplace:
-            self /= self.mag()
+            self /= self.mag
         else:
-            return self / self.mag()
+            return self / self.mag
 
 
     @property
@@ -156,8 +159,8 @@ class Vector(np.ndarray):
 
     def angle(self, other, normal=None):
         'Angle between vectors, might not be normalized.'
-        a = self.unit()
-        b = other.unit()
+        a = self.unit
+        b = other.unit
         # Protection vs. round off error
         ang = np.arccos(np.clip(a.dot(b),-1,1))
         # Only defined for Vector3
@@ -231,23 +234,27 @@ class Vector2D(Vector):
     def __new__(cls, x=0, y=0, dtype=np.double):
         return Vector.__new__(cls, x, y, dtype=dtype)
 
+    @property
     def phi(self):
         return np.arctan2(self.y, self.x).view(np.ndarray)
 
+    @property
     def rho(self):
-        return self[:2].view(Vector2D).mag().view(np.ndarray)
+        return self[:2].view(Vector2D).mag.view(np.ndarray)
 
     def angle(self, other):
         'Angle between two vectors'
         return super(Vector2D, self).angle(other)
 
+    @property
     def pt2(self):
         'Tranverse compenent squared'
-        return self[:2].view(Vector2D).mag2().view(np.ndarray)
+        return self[:2].view(Vector2D).mag2.view(np.ndarray)
 
+    @property
     def pt(self):
         'Tranverse compenent'
-        return self.rho()
+        return self.rho
 
 class Vector3D(Vector2D):
     __slots__ = ()
@@ -261,12 +268,14 @@ class Vector3D(Vector2D):
                         self.z*other.x - self.x*other.z,
                         self.x*other.y - self.y*other.x)
 
+    @property
     def theta(self):
         prep = np.sqrt(self.x*self.x + self.y*self.y)
         return np.arctan2(prep,self.z).view(np.ndarray)
 
+    @property
     def r(self):
-        return self[:3].view(Vector3D).mag().view(np.ndarray)
+        return self[:3].view(Vector3D).mag.view(np.ndarray)
 
 
     def in_basis(self, xhat, yhat, zhat):
@@ -279,7 +288,7 @@ class Vector3D(Vector2D):
 
     def rotate_axis(self, axis, angle):
         """Rotate vector by a given angle (in radians) around a given axis."""
-        u = axis.unit()
+        u = axis.unit
 
         c, s = np.cos(angle), np.sin(angle)
         c1 = 1. - c
@@ -374,58 +383,65 @@ class LorentzVector(Vector3D):
         return self
 
     @property
-    def vect(self):
+    def p3(self):
         return self[:3].view(Vector3D)
-    @vect.setter
-    def vect(self, obj):
+    @p3.setter
+    def p3(self, obj):
         self[:3] = obj
 
+
+    @property
     def p(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.p()
+        >>> v.p
         array([ 3.74165739])
         '''
-        return np.sqrt(self.vect.mag2())
+        return np.sqrt(self.p3.mag2)
 
+    @property
     def e(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.e()
+        >>> v.e
         array([ 5.26782688])
         '''
         return self.t
 
+    @property
     def eta(self):
         "The Psuedorapitiy"
-        return -0.5 * np.log((1. - np.cos(self.theta())) / (1. + np.cos(self.theta())))
+        return -0.5 * np.log((1. - np.cos(self.theta)) / (1. + np.cos(self.theta)))
 
+    @property
     def gamma(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.gamma()
+        >>> v.gamma
         array([ 2.01818182])
         '''
 
-        return 1/np.sqrt(1 - self.beta()**2)
+        return 1/np.sqrt(1 - self.beta**2)
 
+    @property
     def beta(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.beta()
+        >>> v.beta
         array([ 0.71028481])
         '''
-        return self.p() / self.e()
+        return self.p / self.e
 
-    def boost_vector(self):
+    @property
+    def boostp3(self):
         '''
         >>> v = LorentzVector(-0.212, 0.0327, 0.0327, -0.099)
-        >>> v.BoostVector()
+        >>> v.boostp3()
         Vector3D([[ 2.14141414],
                [-0.33030303],
                [-0.33030303]])
         >>> v = LorentzVector(1,2,3,4)
-        >>> v.BoostVector()
+        >>> v.boostp3()
         Vector3D([[ 0.25],
                [ 0.5 ],
                [ 0.75]])
@@ -444,36 +460,37 @@ class LorentzVector(Vector3D):
                [ 2.04882269]])
         '''
 
-        b2 = vector3.mag2()
+        b2 = vector3.mag2
         gamma = 1.0 / np.sqrt(1-b2)
         gamma2 = np.zeros_like(b2)
         mask = b2 != 0
         gamma2[mask] = (gamma[mask] - 1) / b2[mask]
         del mask
 
-        bp = self.vect.dot(vector3)
+        bp = self.p3.dot(vector3)
         if inplace:
-            self.vect += gamma2*bp*vector3 + gamma*vector3*self.t
+            self.p3 += gamma2*bp*vector3 + gamma*vector3*self.t
             self.t += bp
             self.t *= gamma
         else:
-            v = self.vect + gamma2*bp*vector3 + gamma*vector3*self.t
+            v = self.p3 + gamma2*bp*vector3 + gamma*vector3*self.t
             return self.__class__(v[0], v[1], v[2], gamma*(self.t+bp))
 
     def delta_r(self, other):
         """Return :math:`\\Delta R` the distance in (eta,phi) space with another Lorentz vector, defined as:
         :math:`\\Delta R = \\sqrt{(\\Delta \\eta)^2 + (\\Delta \\phi)^2}`
         """
-        delta_phi = np.mod(self.phi() - other.phi() + np.pi, np.pi*2) - np.pi
-        return np.sqrt((self.eta() - other.eta())**2 + delta_phi**2)
+        delta_phi = np.mod(self.phi - other.phi + np.pi, np.pi*2) - np.pi
+        return np.sqrt((self.eta - other.eta)**2 + delta_phi**2)
 
     def pseudorapidity(self):
-        """"Return the pseudorapidity. Alternative to eta() method."""
-        return self.eta()
+        """"Return the pseudorapidity. Alternative to eta method."""
+        return self.eta
 
+    @property
     def rapidity(self):
         """Return the rapidity."""
-        return 0.5 * np.log( (self.e() + self.z)/(self.e() - self.z) )
+        return 0.5 * np.log( (self.e + self.z)/(self.e - self.z) )
 
 _add_names(Vector2D)
 _add_names(Vector3D)

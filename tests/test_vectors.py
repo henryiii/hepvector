@@ -57,15 +57,15 @@ def test_vectors_3D_constructors():
 
     v5 = Vector3D.from_cylindrical_coords(1., 0., 1.)
     assert np.all(v5 == Vector3D(1., 0., 1.))
-    assert v5.rho() == 1.
+    assert v5.rho == 1.
 
     v6 = Vector3D.from_cylindrical_coords(0.5, pi / 2, 0.)
     assert_allclose(v6, Vector3D(0., 0.5, 0.))
 
     v7 = Vector3D.from_spherical_coords(1.0, 0., 0.)
     assert np.all(v7 == Vector3D(0., 0., 1.))
-    assert v7.r() == 1.
-    assert v7.theta() == 0.
+    assert v7.r == 1.
+    assert v7.theta == 0.
 
     v8 = Vector3D.from_spherical_coords(1.0, 0., pi / 2)
     assert_allclose(v8, Vector3D(0., 0., 1.))
@@ -215,20 +215,20 @@ def test_vectors_Lorentz_operators():
 
 def test_vectors_3D_rotations():
     v1 = Vector3D.from_cylindrical_coords(1., 0., 0.)
-    assert v1.phi() == 0.0
-    assert v1.rotate_axis(Vector3D.Z, pi/2).phi() == pi/2
+    assert v1.phi == 0.0
+    assert v1.rotate_axis(Vector3D.Z, pi/2).phi == pi/2
     assert_allclose(v1.rotate_axis(Vector3D.Z, pi/2), Vector3D(0., 1.,  0.), atol = .0000001)
-    assert v1.rotate_axis(Vector3D.Y, pi).phi() == pi
-    assert v1.rotate_axis(Vector3D.Y, -pi).phi() == pi
+    assert v1.rotate_axis(Vector3D.Y, pi).phi == pi
+    assert v1.rotate_axis(Vector3D.Y, -pi).phi == pi
     assert_allclose( v1.rotate_axis(Vector3D.Y, pi) , Vector3D(-1., 0.,  0.), atol = .0000001)
     assert_allclose( v1.rotate_axis(Vector3D.Y, -pi) , Vector3D(-1., 0.,  0.), atol = .0000001)
-    assert v1.rotate_axis(Vector3D.X, pi).phi() == 0.
+    assert v1.rotate_axis(Vector3D.X, pi).phi == 0.
     assert_allclose(v1.rotate_axis(Vector3D.X, pi) , Vector3D(1., 0.,  0.), atol = .0000001)
     v2 = Vector3D.from_spherical_coords(1.0, pi / 2, pi / 2)
-    assert v2.phi() == pi/2
-    assert v2.theta() == pi/2
-    assert v2.rotate_axis(Vector3D.X, pi).phi() == -pi/2
-    assert v2.rotate_axis(Vector3D.X, pi).theta() == pi/2
+    assert v2.phi == pi/2
+    assert v2.theta == pi/2
+    assert v2.rotate_axis(Vector3D.X, pi).phi == -pi/2
+    assert v2.rotate_axis(Vector3D.X, pi).theta == pi/2
     assert_allclose(v2.rotate_axis(Vector3D.X, pi), Vector3D(0., -1.,  0.), atol = .0000001)
     v3 = Vector3D.from_spherical_coords(1.0, pi / 4, pi / 4)
     angle = v2.angle(v3)
@@ -255,20 +255,20 @@ def test_vectors_Lorentz_rotations():
         LorentzVector.rotate_axis(LorentzVector(), pi, ['a','b',3])
     #
     lv1 = LorentzVector(v1[0], v1[1], v1[2], 1.)
-    assert lv1.phi() == 0.
-    assert lv1.rotate_axis(Vector3D.Z, pi/2).phi() == pi/2
+    assert lv1.phi == 0.
+    assert lv1.rotate_axis(Vector3D.Z, pi/2).phi == pi/2
     assert_allclose( lv1.rotate_axis(Vector3D.Z,pi/2) , LorentzVector(0., 1., 0.,  1.))
-    assert lv1.rotate_axis(Vector3D.Y,pi).phi() == pi
-    assert lv1.rotate_axis(Vector3D.Y,-pi).phi() == pi
+    assert lv1.rotate_axis(Vector3D.Y,pi).phi == pi
+    assert lv1.rotate_axis(Vector3D.Y,-pi).phi == pi
     assert_allclose( lv1.rotate_axis(Vector3D.Y,pi) , LorentzVector(-1., 0., 0.,  1.))
     assert_allclose( lv1.rotate_axis(Vector3D.Y,-pi) , LorentzVector(-1., 0., 0.,  1.))
-    assert lv1.rotate_axis(Vector3D.X,pi).phi() == 0.
+    assert lv1.rotate_axis(Vector3D.X,pi).phi == 0.
     assert_allclose( lv1.rotate_axis(Vector3D.X,pi) , LorentzVector(1., 0., 0.,  1.))
     lv2 = LorentzVector(v2[0], v2[1], v2[2], 2.0)
-    assert lv2.phi() == pi/2
-    assert lv2.theta() == pi/2
-    assert lv2.rotate_axis(Vector3D.X,pi).phi() == -pi/2
-    assert lv2.rotate_axis(Vector3D.X,pi).theta() == pi/2
+    assert lv2.phi == pi/2
+    assert lv2.theta == pi/2
+    assert lv2.rotate_axis(Vector3D.X,pi).phi == -pi/2
+    assert lv2.rotate_axis(Vector3D.X,pi).theta == pi/2
     assert_allclose( lv2.rotate_axis(Vector3D.X,pi) , LorentzVector(0., -1., 0.,  2.0))
     lv3 = LorentzVector(v3[0], v3[1], v3[2], 2.0)
     assert_allclose( lv2.rotate_axis(axis, angle) ,  lv3, atol = .0000001)
@@ -281,13 +281,13 @@ def test_3Dvectors_properties():
     v5, v6 = Vector3D(1., 1., 0.), Vector3D(0., 0., 2.)
     assert np.all(v0 == [0,0,0])
     assert np.all(v1 == [1,1,1])
-    assert v1.mag2() == 3.
-    assert v1.mag() == sqrt(3.)
-    assert v2.mag2() == 12.
-    assert v2.mag() == sqrt(12.)
-    assert v1.unit().mag() == 1.
-    v7 = v1.unit()
-    assert np.all(v1.unit() == v7.unit())
+    assert v1.mag2 == 3.
+    assert v1.mag == sqrt(3.)
+    assert v2.mag2 == 12.
+    assert v2.mag == sqrt(12.)
+    assert v1.unit.mag == 1.
+    v7 = v1.unit
+    assert np.all(v1.unit == v7.unit)
 
     # assert v1.isparallel(v2) == True
     # assert v2.isparallel(v1) == True
@@ -322,11 +322,11 @@ def test_lorentz_vectors_properties():
     lv0 = LorentzVector()
     lv1 = LorentzVector(1., 1., 1., 1.)
     lv2 = LorentzVector(1., 1., 1., 2.)
-    assert np.all(lv1.boost_vector() == Vector3D(1., 1.,  1.))
-    assert lv1.p() == np.sqrt(3.)
-    assert lv1.e() == 1.
-    assert lv1.beta() == sqrt(3.)
-    assert np.all(lv2.boost_vector() == Vector3D(0.5, 0.5,  0.5))
+    assert np.all(lv1.boostp3 == Vector3D(1., 1.,  1.))
+    assert lv1.p == np.sqrt(3.)
+    assert lv1.e == 1.
+    assert lv1.beta == sqrt(3.)
+    assert np.all(lv2.boostp3 == Vector3D(0.5, 0.5,  0.5))
     lv3 = LorentzVector(0., 0., 1., 0.)
     beta = 0.05
     gamma = 1/sqrt(1 - beta**2)
@@ -337,8 +337,8 @@ def test_lorentz_vectors_properties():
     assert lv4.t == - gamma * (lv3.t - beta * lv3.z) # Added -
     assert_allclose(lv4, LorentzVector(lv3.x, lv3.y, lv3.z * gamma, -gamma * (lv3.t - beta * lv3.z))) # Added -
     lv5 = LorentzVector(0., 0., 0., 1.)
-    assert lv5.beta() == 0.
-    assert lv5.gamma() == 1.
+    assert lv5.beta == 0.
+    assert lv5.gamma == 1.
     assert_allclose(lv5.boost(Vector3D(0,0,0)), lv5)
     lv6 = lv5.boost(Vector3D(0,beta,0))
     assert lv6.x == lv5.x
@@ -354,50 +354,50 @@ def test_lorentz_vectors_properties_again():
     assert p1.y == 5.
     assert p1.z == 10.
     assert p1.t == 5.
-    assert p1.mag() == approx(-11.180340)
-    assert p1.mag2() == approx(-125)
-    assert p1.pt() == sqrt(p1.x**2 + p1.y**2)
-    assert p1.p() == sqrt(p1.x**2 + p1.y**2 + p1.z**2)
-    assert p1.p() == sqrt(p1.pt()**2 + p1.z**2)
-    assert p1.e() == sqrt(p1.mag2() + p1.p()**2)
-    assert p1.beta() == p1.p() / p1.e()
+    assert p1.mag == approx(-11.180340)
+    assert p1.mag2 == approx(-125)
+    assert p1.pt == sqrt(p1.x**2 + p1.y**2)
+    assert p1.p == sqrt(p1.x**2 + p1.y**2 + p1.z**2)
+    assert p1.p == sqrt(p1.pt**2 + p1.z**2)
+    assert p1.e == sqrt(p1.mag2 + p1.p**2)
+    assert p1.beta == p1.p / p1.e
 
 def test_lorentz_vectors_boosting():
     p3 = LorentzVector(5.,5.,10.,20)
     assert p3.x == 5.
     assert p3.y == 5.
     assert p3.z == 10.
-    assert p3.e() == 20.
-    assert p3.mag() == sqrt(p3.e()**2 - p3.p()**2)
-    assert p3.beta() == p3.p() / p3.e()
+    assert p3.e == 20.
+    assert p3.mag == sqrt(p3.e**2 - p3.p**2)
+    assert p3.beta == p3.p / p3.e
 
     p4 = LorentzVector.from_pt_eta_phi_m(10., 3.5, pi/3, 5.)
-    assert p4.pt() == approx(10.)
-    assert p4.eta() == approx(3.5)
-    assert p4.phi() == approx(pi/3)
-    assert p4.mag() == approx(5.)
+    assert p4.pt == approx(10.)
+    assert p4.eta == approx(3.5)
+    assert p4.phi == approx(pi/3)
+    assert p4.mag == approx(5.)
 
     p5 = LorentzVector.from_pt_eta_phi(10., 3.9, -2*(pi/3), 20.)
-    assert p5.pt() == approx(10.)
-    assert p5.eta() == approx(3.9)
-    assert p5.phi() == approx(-2*(pi/3))
-    assert p5.e() == approx(20.)
-    assert p5.eta() - p4.eta() == approx(0.4)
-    assert p5.phi() - p4.phi() == approx(-pi)
+    assert p5.pt == approx(10.)
+    assert p5.eta == approx(3.9)
+    assert p5.phi == approx(-2*(pi/3))
+    assert p5.e == approx(20.)
+    assert p5.eta - p4.eta == approx(0.4)
+    assert p5.phi - p4.phi == approx(-pi)
     assert p5.delta_r(p4) == approx(sqrt(0.4**2 + pi**2))
 
     p6 = LorentzVector.from_pt_eta_phi(10.,3.9,-pi,20.)
-    assert np.mod(p6.phi() - p4.phi() + np.pi, np.pi*2) - np.pi == approx(2*(pi/3))
-    assert np.mod(p4.phi() - p6.phi() + np.pi, np.pi*2) - np.pi == approx(-2*(pi/3))
+    assert np.mod(p6.phi - p4.phi + np.pi, np.pi*2) - np.pi == approx(2*(pi/3))
+    assert np.mod(p4.phi - p6.phi + np.pi, np.pi*2) - np.pi == approx(-2*(pi/3))
 
     p7 = LorentzVector(5.,5.,5.,0.)
-    assert p7.beta() == np.inf
-    assert np.isnan(p7.gamma()),  "Gamma of the photons is +inf"
-    # assert p7.p() == p7.e(),  "Momentum = Energy for photons"
-    assert np.isnan(p7.rapidity())
+    assert p7.beta == np.inf
+    assert np.isnan(p7.gamma),  "Gamma of the photons is +inf"
+    # assert p7.p == p7.e,  "Momentum = Energy for photons"
+    assert np.isnan(p7.rapidity)
 
     p8 = LorentzVector.from_pt_eta_phi(10.,2E2,-2*(pi/3),20.) #sinh(eta) diverge quickly
-    assert p8.theta() == approx(0.0)
-    assert p8.eta() > 1E10
+    assert p8.theta == approx(0.0)
+    assert p8.eta > 1E10
 
 
