@@ -95,7 +95,7 @@ def test_values(xyz, t):
     # def cross(self, other):
 
     # def theta(self):
-    assert svec.theta() == approx(rvec.Theta())
+    assert svec.theta == approx(rvec.Theta())
 
     # def r(self):
     # def in_basis(self, xhat, yhat, zhat):
@@ -110,7 +110,7 @@ def test_values(xyz, t):
     # def p3(self, obj):
 
     # def p(self):
-    assert svec.p() == approx(rvec.P())
+    assert svec.p == approx(rvec.P())
 
     # def e(self):
     # def eta(self):
@@ -118,7 +118,7 @@ def test_values(xyz, t):
     # def beta(self):
 
     # def boost_vector(self):
-    assert_same(svec.boost_vector(), rvec.BoostVector())
+    assert_same(svec.boostp3, rvec.BoostVector())
 
     # def boost(self, vector3, inplace=False):
     # def delta_r(self, other):

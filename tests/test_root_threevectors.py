@@ -91,7 +91,7 @@ def test_values(xyz):
     # def cross(self, other):
 
     # def theta(self):
-    assert svec.theta() == approx(rvec.Theta())
+    assert svec.theta == approx(rvec.Theta())
 
     # def r(self):
     # def in_basis(self, xhat, yhat, zhat):

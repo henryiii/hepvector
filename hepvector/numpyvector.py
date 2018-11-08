@@ -246,10 +246,12 @@ class Vector2D(Vector):
         'Angle between two vectors'
         return super(Vector2D, self).angle(other)
 
+    @property
     def pt2(self):
         'Tranverse compenent squared'
         return self[:2].view(Vector2D).mag2.view(np.ndarray)
 
+    @property
     def pt(self):
         'Tranverse compenent'
         return self.rho
@@ -266,10 +268,12 @@ class Vector3D(Vector2D):
                         self.z*other.x - self.x*other.z,
                         self.x*other.y - self.y*other.x)
 
+    @property
     def theta(self):
         prep = np.sqrt(self.x*self.x + self.y*self.y)
         return np.arctan2(prep,self.z).view(np.ndarray)
 
+    @property
     def r(self):
         return self[:3].view(Vector3D).mag.view(np.ndarray)
 
@@ -385,52 +389,59 @@ class LorentzVector(Vector3D):
     def p3(self, obj):
         self[:3] = obj
 
+
+    @property
     def p(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.p()
+        >>> v.p
         array([ 3.74165739])
         '''
         return np.sqrt(self.p3.mag2)
 
+    @property
     def e(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.e()
+        >>> v.e
         array([ 5.26782688])
         '''
         return self.t
 
+    @property
     def eta(self):
         "The Psuedorapitiy"
-        return -0.5 * np.log((1. - np.cos(self.theta())) / (1. + np.cos(self.theta())))
+        return -0.5 * np.log((1. - np.cos(self.theta)) / (1. + np.cos(self.theta)))
 
+    @property
     def gamma(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.gamma()
+        >>> v.gamma
         array([ 2.01818182])
         '''
 
-        return 1/np.sqrt(1 - self.beta()**2)
+        return 1/np.sqrt(1 - self.beta**2)
 
+    @property
     def beta(self):
         '''
         >>> v = LorentzVector(1,2,3,.5)
-        >>> v.beta()
+        >>> v.beta
         array([ 0.71028481])
         '''
-        return self.p() / self.e()
+        return self.p / self.e
 
-    def boost_vector(self):
+    @property
+    def boostp3(self):
         '''
         >>> v = LorentzVector(-0.212, 0.0327, 0.0327, -0.099)
-        >>> v.BoostVector()
+        >>> v.boostp3()
         Vector3D([[ 2.14141414],
                [-0.33030303],
                [-0.33030303]])
         >>> v = LorentzVector(1,2,3,4)
-        >>> v.BoostVector()
+        >>> v.boostp3()
         Vector3D([[ 0.25],
                [ 0.5 ],
                [ 0.75]])
@@ -470,15 +481,16 @@ class LorentzVector(Vector3D):
         :math:`\\Delta R = \\sqrt{(\\Delta \\eta)^2 + (\\Delta \\phi)^2}`
         """
         delta_phi = np.mod(self.phi - other.phi + np.pi, np.pi*2) - np.pi
-        return np.sqrt((self.eta() - other.eta())**2 + delta_phi**2)
+        return np.sqrt((self.eta - other.eta)**2 + delta_phi**2)
 
     def pseudorapidity(self):
-        """"Return the pseudorapidity. Alternative to eta() method."""
-        return self.eta()
+        """"Return the pseudorapidity. Alternative to eta method."""
+        return self.eta
 
+    @property
     def rapidity(self):
         """Return the rapidity."""
-        return 0.5 * np.log( (self.e() + self.z)/(self.e() - self.z) )
+        return 0.5 * np.log( (self.e + self.z)/(self.e - self.z) )
 
 _add_names(Vector2D)
 _add_names(Vector3D)
