@@ -101,9 +101,9 @@ class Vector(np.ndarray):
             metric = self.METRIC.copy()
             for axis in range(len(self.shape) - 1):
                 metric = np.expand_dims(metric, -1)
-            return np.sum((self*metric) * other, 0).view(np.ndarray)
+            return np.sum((np.asarray(self)*metric) * np.asarray(other), 0)
         else:
-            return np.sum(self * other, 0).view(np.ndarray)
+            return np.sum(np.asarray(self) * np.asarray(other), 0)
 
 
     @property
@@ -119,7 +119,7 @@ class Vector(np.ndarray):
         array([ 3.74165739,  4.69041576,  5.91607978])
         '''
 
-        return np.sqrt(np.abs(self.mag2).view(np.ndarray))*np.sign(self.mag2)
+        return np.sqrt(np.abs(self.mag2))*np.sign(self.mag2)
 
     @property
     def mag2(self):
@@ -196,6 +196,9 @@ class Vector(np.ndarray):
 
     def __setitem__(self, item, value):
         self.view(np.ndarray).__setitem__(item, value)
+
+    def __eq__(self, other):
+        return np.asarray(self) == np.asarray(other)
 
     @property
     def dims(self):
