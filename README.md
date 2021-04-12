@@ -1,6 +1,10 @@
+This package has been completely redesigned and released as [`vector`](https://github.com/scikit-hep/vector), use `pip install vector` to obtain. The array-at-a-time computations from HEPVector are present, along with Numba support, Awkward support, and much more!
+
+---
+
 ![HEPVector](images/HEPvector.png)
 
-[![image](https://img.shields.io/pypi/v/hepvector.svg)](https://pypi.python.org/pypi/hepvector)
+
 [![image](https://travis-ci.com/henryiii/hepvector.svg?branch=master)](https://travis-ci.com/henryiii/hepvector)
 [![Documentation Status](https://readthedocs.org/projects/hepvector/badge/?version=latest)](https://hepvector.readthedocs.io/en/latest/?badge=latest)
 [![Updates](https://pyup.io/repos/github/henryiii/hepvector/shield.svg)](https://pyup.io/repos/github/henryiii/hepvector/)
